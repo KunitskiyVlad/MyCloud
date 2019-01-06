@@ -1,0 +1,175 @@
+.head{
+    background-color: #5253a6;
+    color: white;
+}
+.navbar-brand, .nav-link, .navbar-toggler-icon{
+    color: white;
+}
+.navbar-brand:hover, .nav-link:hover, .btn-link:hover{
+    color: red;
+}
+.navbar-toggler-icon {
+    background-image: url("data:image/svg+xml;charset=utf8,%3Csvg viewBox='0 0 32 32' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath stroke='rgba(255,255,255, 0.5)' stroke-width='2' stroke-linecap='round' stroke-miterlimit='10' d='M4 8h24M4 16h24M4 24h24'/%3E%3C/svg%3E");
+}
+.home-main-page{
+    background-image: url("../background-twitter-images-1920x1080.png");
+    min-height: 100%;
+    min-width: 100%;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: cover;
+}
+.html, body{
+    margin: 0;
+    padding: 0;
+    height: 100vh;
+}
+.loader{
+    position:relative;
+    top:250px;
+    margin: 0 auto;
+}
+.symbol-dragAndDrop{
+    background-image: url("../Drag_Drop_photo-resizer.ru.png");
+    display: inline-block;
+    width: 48px;
+    height: 50px;
+}
+.hover{
+    border: dashed 3px #ff083b;
+}
+.hover :before{
+    min-height: 100%;
+    min-width: 100%;
+    background-color: #c1c1c1;
+    opacity: 0.3;
+    position: fixed;
+    z-index: 250;
+}
+.modal-load-file{
+    display: block;
+    position: absolute;
+    top: 25%;
+    left: 25%;
+    z-index: 500;
+
+}
+.modal-load-file :after{
+    min-height: 100vh;
+    min-width: 100vh;
+    background-color: #bdbfbc;
+    content: '';
+    opacity: 0.5;
+}
+.file-image{
+    background-image: url("../Без названия_photo-resizer.ru.png");
+    width: 20px;
+    height: 20px;
+    display: inline-block;
+}
+.navbar-container{
+    margin-left: 25px;
+}
+.navbar-login{
+   float: left;
+}
+.file-input{
+    position: absolute;
+    top: 0;
+    visibility: hidden
+}
+.upload-field{
+    background-color: #4e6772;
+
+    min-height: 400px;
+    border: 2px solid #b0b0b0;
+    color: white;
+}
+.field-select{
+    height: 50px;
+    background-color: #fff;
+    opacity: 0.8;
+    border:1px solid #d7d7d7;
+    cursor: pointer;
+    padding-right: 0;
+    border-right: 0;
+}
+.selected{
+    height: 50px;
+    background-color: #3557c1;
+    opacity: 0.8;
+    border:1px solid #d7d7d7;
+    cursor: pointer;
+    padding-right: 0;
+    border-right: 0;
+}
+.file-frame{
+    border: 1px solid #c5c0bf;
+    background-color: #59747f;
+}
+.far:hover, .fas:hover{
+    cursor: pointer;
+}
+.fa-heart, .fa-comment-alt, .fa-download,.fa-file{
+    color:white;
+}
+.fas.fa-heart{
+    color: red;
+}
+.image{
+    height: 50px;
+    width: 50px;
+}
+.info{
+    display: none;
+}
+.show-info-button{}
+.comment{
+    display: none;
+}
+.list{
+    padding: 10px;
+    margin: 5px;
+}
+.close{
+    float: right;
+}
+.success-window{
+    width: 250px;
+    height: 45px;
+    background-color: #5d0e9a;
+    color: white;
+    position: absolute;
+    top:150px;
+    border-radius: 6px;
+    border-color: #16544e;
+    border-style: outset;
+    border-width: 2px;
+    text-align: center;
+    padding: 5px;
+    right:25px;
+    opacity: 0;
+}
+.check{
+    color: #20a53c;
+    position: relative;
+}
+.check:after{
+    content: "";
+    background-color: transparent;
+
+    /* position the checkbox */
+    position: absolute;
+    top: -5px;
+    width: 15px;
+    left: 5px;
+    border-bottom: 3px solid #20a53c;
+    height: 25px;
+    border-right: 3px solid #20a53c;
+
+    /* rotate the mirrored L to make it a checkbox */
+    transform: rotate(45deg);
+    -o-transform: rotate(45deg);
+    -ms-transform: rotate(45deg);
+    -webkit-transform: rotate(45deg);
+}
