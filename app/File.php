@@ -39,7 +39,8 @@ class File extends Model
         $Type = substr($TypeMime, 0, $pos);
         return $Type;
     }
-    public function upload($files){
+
+    public function upload($files, $uploadBy){
         if(isset($avatars))
             $dopPath = $avatars;
         else

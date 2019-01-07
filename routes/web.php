@@ -23,6 +23,9 @@ Route::group(['prefix' =>  App\Http\Middleware\Locale::getLocale()], function() 
     Route::post('file/download', 'ControllerFile@download')->name('file.download');
     Auth::routes();
     Route::post('translate','ControllerLanguages@GetTranslate')->name('translate');
+    Route::resource('profile', 'ControllerProfile', ['only' => [
+        'index', 'update', 'destroy'
+    ]])->middleware('auth');
 
 });
 Route::get('setlocale/{locale}', function ($locale) {
