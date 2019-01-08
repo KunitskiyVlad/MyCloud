@@ -37,8 +37,8 @@
                                 <span class="text-light">@lang('interface.uploadedBy'):</span>
                             </div>
                             <div class="col-5 d-inline-block">
-                                @if(isset($file['upload_by']))
-                                <span class="text-light">{{$file['upload_by']}}</span>
+                                @if(isset($UserUpload[$file['user_id']]))
+                                <span class="text-light">{{$UserUpload[$file['user_id']]['name']}}</span>
                                 @else
                                     <span class="text-light">@lang('interface.anon')</span>
                                     @endif

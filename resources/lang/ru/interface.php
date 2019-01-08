@@ -31,4 +31,9 @@
  'goodPassword'=>'Хороший пароль',
  'strongPassword'=>'Сильный пароль',
  'downloaded'=>'Скачан',
+ 'settings' => 'Настройки',
+ 'logout'=>'Выйти',
+ 'save'=>'Сохранить',
+ 'uploadFiles'=>'Загружено файлов',
+ 'files'=>'Файлы',
  ];

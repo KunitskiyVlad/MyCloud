@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\File;
 use Illuminate\Support\Carbon;
+use Illuminate\Support\Facades\Auth;
 class ControllerFile extends Controller
 {
     /**
@@ -20,9 +21,11 @@ class ControllerFile extends Controller
         foreach ($files as $file){
             $files[$i]['size_file'] = $FileClass->getSize($file['size_file']);
             $i++;
+            $UserUpload[$file['user_id']] = File::find($file['id'])->uploadBy;
         }
         return view('ShowFiles.ShowFile',[
-            'files'=>$files
+            'files'=>$files,
+            'UserUpload'=>$UserUpload,
         ]);
     }
 
@@ -45,8 +48,11 @@ class ControllerFile extends Controller
      */
     public function store(Request $request, File $uploadFile)
     {
-
-        $uploadFile->upload($request->file());
+        $uploadBy=null;
+        if (Auth::check()) {
+            $uploadBy = Auth::user()->id;
+        }
+        $uploadFile->upload($request->file(),$uploadBy);
 
     }
 

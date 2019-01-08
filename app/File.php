@@ -8,7 +8,7 @@ class File extends Model
 {
     //
     private $dir ='Cloud/';
-    protected $fillable = ['old_name', 'new_name', 'upload_by', 'original_type_mime', 'count_download', 'size_file', 'type'],
+    protected $fillable = ['old_name', 'new_name', 'user_id', 'original_type_mime', 'count_download', 'size_file', 'type'],
               $table = 'upload_files';
     public function getSize($size)
     {
@@ -40,13 +40,14 @@ class File extends Model
         return $Type;
     }
 
-    public function upload($files, $uploadBy){
+    public function upload($files, $uploadBy=null){
         if(isset($avatars))
             $dopPath = $avatars;
         else
         {
             $dopPath ='';
         }
+        $DataFile['upload_by'] = $uploadBy;
         foreach ($files as $file) {
             $directory = $this->dir . $dopPath;
             $DataFile['original_name'] = $file->getClientOriginalName();
@@ -59,16 +60,14 @@ class File extends Model
             $DataFile['new_name'] = bin2hex($bytes);
             $path = 'public/'.$this->dir;
             $DataFile['new_name'] = $directory . $DataFile['new_name'] . '.txt';
-            if (isset($uploadBy)) {
-                $DataFile['upload_by'] = $uploadBy;
-            } else {
-                $DataFile['upload_by'] = null;
-            }
+
+
+
             if ($file->storeAs($path, $DataFile['new_name'])) {
                 File::create([
                     'old_name' => $DataFile['original_name'],
                     'new_name' => $DataFile['new_name'],
-                    'upload_by' => $DataFile['upload_by'],
+                    'user_id' => $DataFile['upload_by'],
                     'original_type_mime' => $DataFile['original_mime_type'],
                     'size_file' => $DataFile['size'],
                     'type' => $DataFile['type']
@@ -92,4 +91,9 @@ class File extends Model
         }
         return response()->json(['href' =>'/storage/'.$this->dir.$dataFile['new_name'],'oldName'=>$dataFile['old_name'],'contentType'=>$dataFile['content-type']]);
     }
+
+    public function uploadBy(){
+        return $this->belongsTo('App\User','user_id');
+    }
+
 }

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\User;
+use App\File;
 use Illuminate\Support\Facades\Validator;
 class ControllerProfile extends Controller
 {
@@ -13,10 +14,22 @@ class ControllerProfile extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(File $file)
     {
         //
-        return view('profile.index');
+        $files = User::find(Auth::user()->id)->getFiles;
+        $count = count($files);
+        $SizeUpload =0;
+        if($files) {
+            foreach ($files as $file) {
+                $SizeUpload =$SizeUpload + $file['size_file'];
+            }
+            $SizeUpload = $file->getSize($SizeUpload);
+        }
+        return view('profile.index',[
+            'count'=>$count,
+            'SizeUpload'=>$SizeUpload,
+        ]);
     }
 
     /**
@@ -92,4 +105,13 @@ class ControllerProfile extends Controller
     {
         //
     }
+
+    public function showFiles(){
+
+            //
+            $files = User::find(Auth::user()->id)->getFiles;
+            return view('profile.files',[
+                'files'=>$files,
+            ]);
+        }
 }

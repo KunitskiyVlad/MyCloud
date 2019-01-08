@@ -27,6 +27,9 @@ Route::group(['prefix' =>  App\Http\Middleware\Locale::getLocale()], function() 
         'index', 'update', 'destroy'
     ]])->middleware('auth');
 
+        Route::get( '{user}/files', 'ControllerProfile@showFiles')->name('profile.files')->middleware('auth');
+
+
 });
 Route::get('setlocale/{locale}', function ($locale) {
     $NewUri = null;

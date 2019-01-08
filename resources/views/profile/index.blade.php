@@ -5,7 +5,7 @@
             <div class="file-frame col-lg-7 offset-2">
                 <div class="col-sm-6 col-md-8 col-lg-9 info-user offset-1 ">
                     <div class="col-sm-10">
-                        <label class="col-sm-4">Имя</label>
+                        <label class="col-sm-4">@lang('interface.name')</label>
                         <span class="col-sm-4">{{ Auth::user()->name }}</span>
                     </div>
                     <div class="col-sm-10">
@@ -13,8 +13,8 @@
                         <span class="col-sm-4">{{ Auth::user()->email }}</span>
                     </div>
                     <div class="col-sm-10">
-                        <label class="col-sm-4">Загружено файлов</label>
-                        <span class="col-sm-4">0</span>
+                        <label class="col-sm-4">@lang('interface.uploadFiles')</label>
+                        <span class="col-sm-4">{{$count}} ({{$SizeUpload}})</span>
                     </div>
 
                 </div>
@@ -27,7 +27,7 @@
 
 
                         <div class="col-md-9">
-                            <label class="col-sm-2"  >Имя</label>
+                            <label class="col-sm-2"  >@lang('interface.name')</label>
                             <input class="col-md-9" name="name" value="{{ Auth::user()->name }}">
                         </div>
                         <div class="col-md-9">
@@ -35,7 +35,7 @@
                             <input class="col-md-9" name="email" value="{{ Auth::user()->email }}">
                         </div>
                         <div class="offset-6 p-2">
-                            <button type="submit" class="btn btn-primary of">Сохранить</button>
+                            <button type="submit" class="btn btn-primary of">@lang('interface.save')</button>
                         </div>
                     </form>
                 </div>

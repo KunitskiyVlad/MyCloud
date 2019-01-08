@@ -38,4 +38,9 @@ return [
     'goodPassword'=>'Good password',
     'strongPassword'=>'Strong password',
     'downloaded'=>'downloaded',
+    'settings' => 'Settings',
+    'logout'=>'Logout',
+    'save'=>'save',
+    'uploadFiles'=>'Upload Files',
+    'files'=>'Files',
 ];
