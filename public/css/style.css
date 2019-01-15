@@ -107,7 +107,7 @@
     border: 1px solid #c5c0bf;
     background-color: #59747f;
 }
-.far:hover, .fas:hover{
+.far:hover, .fas:hover, .fa-reply:hover{
     cursor: pointer;
 }
 .fa-heart, .fa-comment-alt, .fa-download,.fa-file{

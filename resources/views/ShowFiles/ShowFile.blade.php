@@ -58,15 +58,30 @@
                 </div>
                 <!--comments-->
                 <div class="col-lg-12 mt-2 offset-2 comment">
-                    <img src="{{asset('104437.jpg')}}" class="image float-left">
+                    <form action="{{route('file.comment.store', $file['id'])}}" method="post" data-fileid="{{$file['id']}}">
+                        {{ csrf_field() }}
 
-                    <div class="col-10 text-left d-inline-block">
-                        <span>Name</span>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-                            Architecto beatae, sapiente! Accusamus doloremque explicabo id totam veritatis!
-                            Laudantium minus mollitia nam possimus! Adipisci cupiditate necessitatibus non quidem soluta, vero voluptate?</p>
-                        <p><span>TimeOffComent</span><i class="fa fa-reply offset-6"></i> </p>
+                        @if(isset($comments[$file['id']]))
+                            @foreach($comments[$file['id']] as $comment)
+                                <img src="{{asset('104437.jpg')}}" class="image float-left">
+                    <div class="col-10 text-left d-inline-block" data-commentId="{{$comment['id']}}">
+
+                        <span>{{$authorComment[$comment['id']]['name']}}</span>
+                        <p>{{$comment['content']}}</p>
+                        <p><span>{{$comment['created_at']}}</span><i class="fa fa-reply offset-6"></i> </p>
                     </div>
+                            @endforeach
+                        @endif
+                        <div data-commentreply="0">
+
+                        </div>
+                    <div class="col-lg-10 col-md-12 col-sm-8 offset-2">
+                        <textarea class="form-control" rows="3" name="content"></textarea>
+                        <div class="offset-5 m-3 col-sm-10">
+                        <button type="button" class="btn btn-primary send">Отправить</button>
+                        </div>
+                    </div>
+                    </form>
                 </div>
                 <!--comments-->
                 </div>

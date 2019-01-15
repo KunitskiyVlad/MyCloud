@@ -96,4 +96,8 @@ class File extends Model
         return $this->belongsTo('App\User','user_id');
     }
 
+    public function comment(){
+        return $this->hasMany('App\Comment');
+    }
+
 }

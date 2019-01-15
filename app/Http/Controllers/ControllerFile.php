@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\File;
+use App\Comment;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Auth;
 class ControllerFile extends Controller
@@ -16,16 +17,27 @@ class ControllerFile extends Controller
     public function index(File $FileClass)
     {
         //
+        $UserUpload =null;
+        $comments = null;
+        $authorComment= null;
         $files = File::whereDate('created_at', Carbon::today())->orderBy('count_download', 'DESC')->take(100)->get();
         $i=0;
         foreach ($files as $file){
             $files[$i]['size_file'] = $FileClass->getSize($file['size_file']);
             $i++;
             $UserUpload[$file['user_id']] = File::find($file['id'])->uploadBy;
+            $comments[$file['id']] = File::find($file['id'])->comment;
+            if(!$comments[$file['id']]->isEmpty()){
+                foreach ($comments[$file['id']] as $comment)
+                $authorComment[$comment['id']] = Comment::find($comment['id'])->user;
+            }
         }
+
         return view('ShowFiles.ShowFile',[
             'files'=>$files,
             'UserUpload'=>$UserUpload,
+            'comments'=>$comments,
+            'authorComment'=>$authorComment,
         ]);
     }
 

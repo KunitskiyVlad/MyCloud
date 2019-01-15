@@ -92,3 +92,47 @@ function GetTranslate(StringName) {
 
     return NewTranslate;
 }
+function AddComment() {
+    var parentForm =this.form,
+        input =parentForm.content.value,
+        fileId = this.form.dataset.fileid,
+        commentreply = parentForm.querySelector('div[data-commentreply]').dataset.commentreply;
+    $.ajax({
+        type: 'post',
+        async: false,
+        url: '/'+location.pathname.substr(1)+'/'+fileId+'/comment',
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        },
+        data: {content:input,commentreplyId:commentreply},
+        success: function (result) {
+          let div = document.createElement('div'),
+              spanName = document.createElement('span'),
+              Content =document.createElement('p');
+          spanName.innerText = result.name;
+          Content.innerText = result.content;
+          div.className +='col-10 text-left d-inline-block';
+          div.appendChild(spanName);
+          div.appendChild(Content);
+          let textareaDiv = parentForm.querySelector('div textarea').parentNode;
+          parentForm.insertBefore(div,textareaDiv);
+        },
+        error:function (data) {
+
+        },
+    });
+
+}
+function ReplyComment(){
+    let ParentDiv = this.closest('div'),
+        Content = ParentDiv.querySelector('p').innerText,
+        CommentId = ParentDiv.dataset.commentid,
+        parentForm = this.closest('form'),
+        textareaDiv = parentForm.querySelector('div textarea').parentNode,
+        divReply = parentForm.querySelector('div[data-commentreply]');
+    divReply.innerHTML='<i>'+Content+'</i>';
+    divReply.dataset.commentreply=CommentId;
+
+}
+$('.send').on('click',AddComment);
+$('.fa-reply').on('click',ReplyComment);

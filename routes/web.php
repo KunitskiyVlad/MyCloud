@@ -26,7 +26,7 @@ Route::group(['prefix' =>  App\Http\Middleware\Locale::getLocale()], function() 
     Route::resource('profile', 'ControllerProfile', ['only' => [
         'index', 'update', 'destroy'
     ]])->middleware('auth');
-
+    Route::resource('file.comment','ControllerComment',['only'=>['store','update','destroy']])->middleware('auth');
         Route::get( '{user}/files', 'ControllerProfile@showFiles')->name('profile.files')->middleware('auth');
 
 
