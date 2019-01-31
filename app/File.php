@@ -100,4 +100,23 @@ class File extends Model
         return $this->hasMany('App\Comment');
     }
 
+    public function createAvatar($text){
+        $image = imagecreate(50,50);
+        $background_color = imagecolorallocate($image, 0, 85, 255);
+        $text_color = imagecolorallocate($image, 255, 255, 255);
+        $font = public_path('Fonts.ttf');
+        imagettftext($image, 27, 0, 15,38, $text_color,$font,$text);
+        $file_name=bin2hex(random_bytes(5)).'.png';
+        imagepng($image,storage_path('app/public/Avatars/'.$file_name));
+        imagedestroy($image);
+        return $file_name;
+    }
+
+    public function saveUserAvatar($content){
+        $file_name = bin2hex(random_bytes(5)).'.png';
+        $stringBase64 = base64_decode(substr_replace($content,'',0,strripos($content,',')+1));
+        file_put_contents(storage_path('app/public/Avatars/').$file_name,$stringBase64);
+        return $file_name;
+    }
+
 }

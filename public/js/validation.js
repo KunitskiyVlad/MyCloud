@@ -1,7 +1,6 @@
 function Validation(idEmail,idPass){
     this.EmailStatus=this.CreateStatusCheck(idEmail);
     this.PasswordStatus=this.CreateStatusCheck(idPass);
-    this.ConfirmPasswordStatus=null;
     this.Email =document.getElementById(idEmail);
     this.Password =document.getElementById(idPass);
     this.TranslateArray =[];
@@ -92,6 +91,43 @@ Validation.prototype={
         this.TranslateArray[0] = GetTranslate('badPassword');
         this.TranslateArray[1] = GetTranslate('goodPassword');
         this.TranslateArray[2] = GetTranslate('strongPassword');
-    }
+    },
+    CheckImage: function(Image){
+        var that =this,
+            fileReader = new FileReader();
+        fileReader.onloadend = function(e) {
+            var arr = (new Uint8Array(e.target.result)).subarray(0, 4);
+            var header ='';
+            for(var i = 0; i < arr.length; i++) {
+                header += arr[i].toString(16);
+
+
+            }
+             var flag = that.TypeMime(header);
+            if (flag === false){
+                alert("Wrong type of file,need image!")
+            }
+        }
+        fileReader.readAsArrayBuffer(Image);
+    },
+    TypeMime: function (header) {
+        var flag = false;
+        switch (header) {
+            case 'ffd8ffe0':
+            case "ffd8ffe0":
+            case "ffd8ffe1":
+            case "ffd8ffe2":
+            case "ffd8ffe3":
+            case "ffd8ffe8":
+            case "89504e47":
+                flag= true;
+                break;
+            default:
+                flag=false;
+                break;
+
+        }
+        return flag;
+    },
 
 }

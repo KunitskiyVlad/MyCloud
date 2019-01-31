@@ -22,6 +22,7 @@ class ControllerFile extends Controller
         $authorComment= null;
         $files = File::whereDate('created_at', Carbon::today())->orderBy('count_download', 'DESC')->take(100)->get();
         $i=0;
+        $FileClass->createAvatar('B');
         foreach ($files as $file){
             $files[$i]['size_file'] = $FileClass->getSize($file['size_file']);
             $i++;
@@ -32,7 +33,6 @@ class ControllerFile extends Controller
                 $authorComment[$comment['id']] = Comment::find($comment['id'])->user;
             }
         }
-
         return view('ShowFiles.ShowFile',[
             'files'=>$files,
             'UserUpload'=>$UserUpload,

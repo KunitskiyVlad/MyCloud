@@ -4,6 +4,8 @@ namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\Schema;
+use App\Providers\pngValidator;
+use \Validator;
 class AppServiceProvider extends ServiceProvider
 {
     /**
