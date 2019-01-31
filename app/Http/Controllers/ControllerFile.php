@@ -27,11 +27,12 @@ class ControllerFile extends Controller
             $files[$i]['size_file'] = $FileClass->getSize($file['size_file']);
             $i++;
             $UserUpload[$file['user_id']] = File::find($file['id'])->uploadBy;
-            $comments[$file['id']] = File::find($file['id'])->comment;
-            if(!$comments[$file['id']]->isEmpty()){
-                foreach ($comments[$file['id']] as $comment)
+            $temp = File::find($file['id'])->comment;
+            if(!$temp->isEmpty()){
+                foreach ($temp as $comment)
                 $authorComment[$comment['id']] = Comment::find($comment['id'])->user;
             }
+            $comments[$file['id']] =$temp->groupBy('parent_id');
         }
         return view('ShowFiles.ShowFile',[
             'files'=>$files,
