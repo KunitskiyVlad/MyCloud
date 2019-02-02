@@ -19,38 +19,31 @@
         {{ csrf_field() }}
         <input type="file" multiple name="files" id="inputFile" class="file-input">
         </form>
-
-    <!--<div class="row justify-content-center">
-        <div class="col-md-8">
-            <div class="card">
-                <div class="card-header">Dashboard</div>
-
-                <div class="card-body">
-                    @if (session('status'))
-                        <div class="alert alert-success" role="alert">
-                            {{ session('status') }}
-                        </div>
-                    @endif
-
-                    You are logged in!
+</div>
+        <div class="modal fade" id="modal" tabindex="-1" role="dialog" aria-labelledby="ModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">@lang('interface.loadedFiles')</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">@lang('interface.close')</button>
+                        <button type="button" id="send" class="btn btn-primary">@lang('interface.send')</button>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>-->
-</div>
-
-            <!--<div class="success-window">
-                <div class="check"></div>
-                <span>Файл успешно загружен</span>
-            </div>-->
-            </main>
+        </main>
         </div>
         </body>
-
-        </html>
+    </html>
     <script src="{{ asset('js/UserInterface.js') }}"></script>
     <script src="{{ asset('js/DragAndDrop.js') }}"></script>
-    <script>new DragAndDropFiles(document.body)
-
-    </script>
+    <script src="{{asset('js/Request.js')}}"></script>
+    <script src="{{ asset('js/MainPage.js')}}"></script>
 @endsection

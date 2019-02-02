@@ -72,6 +72,7 @@ class File extends Model
                     'size_file' => $DataFile['size'],
                     'type' => $DataFile['type']
                 ]);
+                return true;
 
             } else
                 return false;

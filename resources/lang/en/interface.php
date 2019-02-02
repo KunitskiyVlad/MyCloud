@@ -43,4 +43,7 @@ return [
     'save'=>'save',
     'uploadFiles'=>'Upload Files',
     'files'=>'Files',
+    'loadedFiles'=>'loaded files',
+    'close'=> 'Close',
+    'send'=>'Send',
 ];

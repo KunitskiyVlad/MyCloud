@@ -40,16 +40,20 @@ function download(FileName){
         }
     });
 }
-function createWindowStatus() {
+function createWindowStatus(Response) {
     let div = document.createElement('div'),
-        span = document.createElement('span'),
         check = document.createElement('div');
     div.classList.add('success-window');
-    check.classList.add('check');
+    if(Response.success === true){
+        check.classList.add('check');
+    }
+    delete Response.success;
     div.appendChild(check);
-    var success =GetTranslate('successLoad');
-    span.innerText=success;
-    div.appendChild(span);
+    for(let key in Response){
+        let span = document.createElement('span');
+        span.innerText=Response[key];
+        div.appendChild(span);
+    }
     document.body.appendChild(div);
     $(div).animate({opacity:0.9},1000);
     setTimeout(function (){

@@ -16,13 +16,13 @@ class ControllerFile extends Controller
      */
     public function index(File $FileClass)
     {
-        //
+
         $UserUpload =null;
         $comments = null;
         $authorComment= null;
         $files = File::whereDate('created_at', Carbon::today())->orderBy('count_download', 'DESC')->take(100)->get();
         $i=0;
-        $FileClass->createAvatar('B');
+
         foreach ($files as $file){
             $files[$i]['size_file'] = $FileClass->getSize($file['size_file']);
             $i++;
@@ -65,7 +65,12 @@ class ControllerFile extends Controller
         if (Auth::check()) {
             $uploadBy = Auth::user()->id;
         }
-        $uploadFile->upload($request->file(),$uploadBy);
+        if($uploadFile->upload($request->file(),$uploadBy)){
+            return response()->json(['success'=>true,'successUpload'=>__('interface.successLoad')]);
+        }
+        else{
+            return response()->json(['success'=>false,'error'=>__('interface.failedUpload')]);
+        }
 
     }
 
@@ -116,8 +121,8 @@ class ControllerFile extends Controller
 
     public function download(Request $request, File $uploadFile)
     {
-        //dd($request->all());
-        $dataFile = $request->input('FileName');//->except(['_method', '_token']);
+
+        $dataFile = $request->input('FileName');
         return $uploadFile->download($dataFile);
     }
 
