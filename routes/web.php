@@ -20,6 +20,7 @@ Route::group(['prefix' =>  App\Http\Middleware\Locale::getLocale()], function() 
     Route::post('CheckEmail', 'Auth\RegisterController@checkUniqueEmail')->name('CheckEmail');
     Route::get('/', 'HomeController@index')->name('home');
     Route::resource('file', 'ControllerFile');
+    Route::post('file/search','ControllerFile@search')->name('file.search');
     Route::post('file/download', 'ControllerFile@download')->name('file.download');
     Auth::routes();
     Route::post('translate','ControllerLanguages@GetTranslate')->name('translate');

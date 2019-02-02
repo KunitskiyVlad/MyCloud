@@ -120,4 +120,28 @@ class ControllerFile extends Controller
         $dataFile = $request->input('FileName');//->except(['_method', '_token']);
         return $uploadFile->download($dataFile);
     }
+
+    public function search(Request $request,File $FileClass){
+        $UserUpload =null;
+        $comments = null;
+        $authorComment= null;
+        $files = $FileClass->search($request->input('q'))->get();
+        $i=0;
+        $FileClass->createAvatar('B');
+        foreach ($files as $file){
+            $files[$i]['size_file'] = $FileClass->getSize($file['size_file']);
+            $i++;
+            $UserUpload[$file['user_id']] = File::find($file['id'])->uploadBy;
+            $temp = File::find($file['id'])->comment;
+            if(!$temp->isEmpty()){
+                foreach ($temp as $comment)
+                    $authorComment[$comment['id']] = Comment::find($comment['id'])->user;
+            }
+            $comments[$file['id']] =$temp->groupBy('parent_id');
+        }
+        return view('ShowFiles.SearchFile',['files'=>$files,
+            'UserUpload'=>$UserUpload,
+            'comments'=>$comments,
+            'authorComment'=>$authorComment,]);
+    }
 }

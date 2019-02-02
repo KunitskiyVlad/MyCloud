@@ -118,5 +118,9 @@ class File extends Model
         file_put_contents(storage_path('app/public/Avatars/').$file_name,$stringBase64);
         return $file_name;
     }
+    public function search($query)
+    {
+        return self::where('old_name', 'like', '%'.$query.'%');
+    }
 
 }
